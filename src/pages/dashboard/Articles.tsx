@@ -146,7 +146,7 @@ const ArticlesPage: React.FC = () => {
                                     <NavLink
                                         to={"/dashboard/articles/homographs"}
                                     >
-                                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white">
+                                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white transition duration-150 ease-in-out hover:bg-slate-300 hover:text-slate-900">
                                             <h1 className="">
                                                 See more
                                             </h1>
@@ -173,9 +173,9 @@ const ArticlesPage: React.FC = () => {
                             <div className="flex items-center justify-end">
                                 <div>
                                     <NavLink
-                                        to={"/dashboard/articles/homographs"}
+                                        to={"/dashboard/articles/config"}
                                     >
-                                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white">
+                                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white transition duration-150 ease-in-out hover:bg-slate-300 hover:text-slate-900">
                                             <h1 className="">
                                                 See more
                                             </h1>

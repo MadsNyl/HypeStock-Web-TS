@@ -15,6 +15,7 @@ import UsersPage from "./pages/dashboard/Users";
 import NewspapersPage from "./pages/dashboard/Newspapers";
 import NewspaperPage from "./pages/dashboard/Newspaper";
 import AddHomographPage from "./pages/dashboard/AddHomograph";
+import ArticleCrawlerConfigPage from "./pages/dashboard/config/ArticleCrawler";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/dashboard/newspapers" element={<NewspapersPage />} />
                     <Route path="/dashboard/newspapers/:provider" element={<NewspaperPage />} />
                     <Route path="/dashboard/articles" element={<ArticlesPage />} />
+                    <Route path="/dashboard/articles/config" element={<ArticleCrawlerConfigPage />} />
                     <Route path="/dashboard/articles/homographs" element={<HomographsPage />} />
                     <Route path="/dashboard/articles/homographs/:id" element={<HomographDetails />} />
                     <Route path="/dashboard/articles/homographs/add" element={<AddHomographPage />} />
