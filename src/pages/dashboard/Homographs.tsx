@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Homograph from "../../types/Homograph";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Plus from "../../icons/Plus";
-import AddHomograph from "../../components/modal/AddHomograph";
 import { NavLink } from "react-router-dom";
 
 
@@ -12,7 +11,6 @@ const HomographsPage: React.FC = () => {
 
     const [homographs, setHomographs] = useState<Homograph[]>([]);
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [openModal, setOpenModal] = useState<boolean>(false);
 
     const getHomographs = async () => {
         setLoading(true);
@@ -33,12 +31,6 @@ const HomographsPage: React.FC = () => {
 
     return (
         <>
-
-            <AddHomograph 
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-            />
-
             <div className="px-12">
 
                 <div className="pt-8 pb-16 flex items-center justify-between mx-auto w-full">
@@ -47,15 +39,15 @@ const HomographsPage: React.FC = () => {
                     </h1>
 
                     <div>
-                        <button 
-                            onClick={() => setOpenModal(true)}
+                        <NavLink 
+                            to={"/dashboard/articles/homographs/add"}
                             className="flex items-center space-x-3 px-6 py-2 rounded-md bg-emerald-400 text-white font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
                         >
                             <Plus style="w-6 h-6" />
                             <p>
                                 Add new
                             </p>
-                        </button>
+                        </NavLink>
                     </div>
                 </div>
 

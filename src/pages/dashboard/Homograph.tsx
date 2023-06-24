@@ -120,6 +120,18 @@ const HomographDetails: React.FC = () => {
                             { ticker.name }
                         </h1>
                     </div>
+                    
+                    <div>
+                        <button 
+                            onClick={() => setOpenModal(true)}
+                            className="flex items-center space-x-3 px-6 py-2 rounded-md bg-black text-white font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
+                        >
+                            <TrashCan style="w-6 h-6" />
+                            <p>
+                                Delete
+                            </p>
+                        </button>
+                    </div>
 
                 </div>
 

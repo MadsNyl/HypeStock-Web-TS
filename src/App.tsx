@@ -14,6 +14,7 @@ import HomographDetails from "./pages/dashboard/Homograph";
 import UsersPage from "./pages/dashboard/Users";
 import NewspapersPage from "./pages/dashboard/Newspapers";
 import NewspaperPage from "./pages/dashboard/Newspaper";
+import AddHomographPage from "./pages/dashboard/AddHomograph";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/dashboard/articles" element={<ArticlesPage />} />
                     <Route path="/dashboard/articles/homographs" element={<HomographsPage />} />
                     <Route path="/dashboard/articles/homographs/:id" element={<HomographDetails />} />
+                    <Route path="/dashboard/articles/homographs/add" element={<AddHomographPage />} />
                   </Route>
                   <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
                     <Route path="/dashboard/users" element={<UsersPage />} />

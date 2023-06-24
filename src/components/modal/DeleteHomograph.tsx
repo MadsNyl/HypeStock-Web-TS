@@ -23,6 +23,8 @@ const DeleteHomograph: React.FC<HomographModal> = ({ openModal, setOpenModal, ho
             await axios.delete(`/homograph/delete/${homograph.id}`);
             
             navigate("/dashboard/articles/homographs");
+
+            document.body.style.overflow = "";
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log(error.response)
