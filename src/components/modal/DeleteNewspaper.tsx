@@ -13,7 +13,7 @@ const DeleteNewspaper: React.FC<NewspaperModal> = ({ openModal, setOpenModal, ne
     const navigate = useNavigate();
 
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [errMsg, setErrMsg] = useState<string>("");
+    const [_errMsg, setErrMsg] = useState<string>("");
 
     const deleteNewspaper = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

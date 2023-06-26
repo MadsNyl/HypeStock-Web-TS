@@ -14,8 +14,8 @@ const ArticlesPage: React.FC = () => {
     const axios = useAxiosPrivate();
 
     const [baseData, setBaseData] = useState<ArticleBaseData>(defaultArticleBaseData);
-    const [isLoading, setLoading] = useState<boolean>(false);
-    const [days, setDays] = useState<number>(7);
+    const [_isLoading, setLoading] = useState<boolean>(false);
+    const [days, _setDays] = useState<number>(7);
 
     const getBaseData = async () => {   
         setLoading(true);

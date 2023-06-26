@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { axiosPrivate } from "../../api/axios";
 import Newspaper from "../../types/Newspaper";
 import Plus from "../../icons/Plus";
 import Info from "../../icons/Info";
 import NewspaperGuideInfo from "../../types/NewspaperGuideInfo";
 import AddNewspaper from "../../components/modal/AddNewspaper";
-import EditNewspaper from "../../components/modal/EditNewspaper";
-import NewspaperModal from "../../types/NewspaperModal";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { NavLink } from "react-router-dom";
 import GetArticleStatus from "../../components/GetArticleStatus";

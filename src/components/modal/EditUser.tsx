@@ -9,7 +9,7 @@ const EditUser: React.FC<UserModal> = ({ openModal, setOpenModal, user }) => {
     const axios = useAxiosPrivate();
 
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [isLoadingDelete, setLoadingDelete] = useState<boolean>(false);
+    const [_isLoadingDelete, _setLoadingDelete] = useState<boolean>(false);
     const [warning, setWarning] = useState<boolean>(false);
 
     const [role, setRole] = useState<number>(user.role || 0);

@@ -16,6 +16,9 @@ import NewspapersPage from "./pages/dashboard/Newspapers";
 import NewspaperPage from "./pages/dashboard/Newspaper";
 import AddHomographPage from "./pages/dashboard/AddHomograph";
 import ArticleCrawlerConfigPage from "./pages/dashboard/config/ArticleCrawler";
+import ConfigPage from "./pages/dashboard/Config";
+import ConfigFilePage from "./pages/dashboard/config/ConfigFile";
+import ArticleConfigPage from "./pages/dashboard/config/Article";
 
 function App() {
 
@@ -41,6 +44,9 @@ function App() {
                     <Route path="/dashboard/articles/homographs" element={<HomographsPage />} />
                     <Route path="/dashboard/articles/homographs/:id" element={<HomographDetails />} />
                     <Route path="/dashboard/articles/homographs/add" element={<AddHomographPage />} />
+                    <Route path="/dashboard/config" element={<ConfigPage />} />
+                    <Route path="/dashboard/config/file" element={<ConfigFilePage />} />
+                    <Route path="/dashboard/config/article" element={<ArticleConfigPage />} />
                   </Route>
                   <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
                     <Route path="/dashboard/users" element={<UsersPage />} />

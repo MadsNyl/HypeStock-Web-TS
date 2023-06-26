@@ -10,7 +10,7 @@ const HomographsPage: React.FC = () => {
     const axios = useAxiosPrivate();
 
     const [homographs, setHomographs] = useState<Homograph[]>([]);
-    const [isLoading, setLoading] = useState<boolean>(false);
+    const [_isLoading, setLoading] = useState<boolean>(false);
 
     const getHomographs = async () => {
         setLoading(true);

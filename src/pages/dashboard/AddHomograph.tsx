@@ -11,11 +11,11 @@ const AddHomographPage: React.FC = () => {
 
     const axios = useAxiosPrivate();
 
-    const [isLoading, setLoading] = useState<boolean>(false);
+    const [_isLoading, setLoading] = useState<boolean>(false);
     const [word, setWord] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [tickers, setTickers] = useState<Ticker[]>([]);
-    const [errMsg, setErrMsg] = useState<string>("");
+    const [_errMsg, setErrMsg] = useState<string>("");
     const [searchWord, setSearchWord] = useState<string>("");
     const [saveDisabled, setSaveDisabled] = useState<boolean>(true);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);

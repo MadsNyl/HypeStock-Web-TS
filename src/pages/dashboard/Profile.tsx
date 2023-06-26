@@ -3,7 +3,6 @@ import useAuth from "../../hooks/useAuth";
 import Profile from "../../icons/Profile";
 import Snackbar from "../../components/Snackbar";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { axiosPrivate } from "../../api/axios";
 
 
 const ProfilePage: React.FC = () => {
@@ -14,7 +13,7 @@ const ProfilePage: React.FC = () => {
     const [username, setUsername] = useState<string>(auth?.username);
     const [password, setPassword] = useState<string>("");
     const [oldPassword, setOldPassword] = useState<string>("");
-    const [isLoading, setLoading] = useState<boolean>(false);
+    const [_isLoading, setLoading] = useState<boolean>(false);
     const [disabledSave, setDisabledSave] = useState<boolean>(true);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
 
@@ -23,7 +22,7 @@ const ProfilePage: React.FC = () => {
         setLoading(true);
 
         try {
-            await axiosPrivate.put(
+            await axios.put(
                 "/auth/update",
                 JSON.stringify({
                     password: password,

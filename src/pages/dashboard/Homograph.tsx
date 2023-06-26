@@ -16,7 +16,7 @@ const HomographDetails: React.FC = () => {
     const axios = useAxiosPrivate();
 
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [isUpdateLoading, setUpdateLoading] = useState<boolean>(false);
+    const [_isUpdateLoading, setUpdateLoading] = useState<boolean>(false);
     const [homograph, setHomograph] = useState<Homograph>(defaultHomograph);
     const [ticker, setTicker] = useState<Ticker>(defaultTicker);
     const [openModal, setOpenModal] = useState<boolean>(false);

@@ -9,7 +9,7 @@ const EditNewspaper: React.FC<NewspaperModal> = ({ openModal, setOpenModal, news
     const axios = useAxiosPrivate();
 
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [isLoadingDelete, setLoadingDelete] = useState<boolean>(false);
+    const [_isLoadingDelete, setLoadingDelete] = useState<boolean>(false);
     const [warning, setWarning] = useState<boolean>(false);
 
     const [provider, setProvider] = useState<string>(newspaper.provider);

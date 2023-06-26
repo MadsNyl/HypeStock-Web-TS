@@ -13,7 +13,7 @@ const DeleteHomograph: React.FC<HomographModal> = ({ openModal, setOpenModal, ho
     const navigate = useNavigate();
 
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [errMsg, setErrMsg] = useState<string>("");
+    const [_errMsg, setErrMsg] = useState<string>("");
 
     const deleteHomograph = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
