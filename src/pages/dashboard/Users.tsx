@@ -83,9 +83,9 @@ const UsersPage: React.FC = () => {
                 user={editUser}
             />
 
-            <div className="px-12">
-                <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+            <div className="px-6 md:px-12">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         Users
                     </h1>
 
@@ -93,9 +93,9 @@ const UsersPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="pb-24 flex justify-between">
+                <div className="pb-24 md:flex md:justify-between space-y-16 md:space-y-0">
                     <div className="max-w-lg w-full">
-                        <div className="flex items-center space-x-2 pb-8 px-6">
+                        <div className="flex items-center space-x-2 pb-6 md:pb-8 md:px-6">
                             <h1 className="text-2xl font-semibold">
                                 Editors
                             </h1>
@@ -143,7 +143,7 @@ const UsersPage: React.FC = () => {
                     </div>
 
                     <div className="max-w-lg w-full">
-                        <div className="flex items-center space-x-2 pb-8 px-6">
+                        <div className="flex items-center space-x-2 pb-6 md:pb-8 md:px-6">
                             <h1 className="text-2xl font-semibold">
                                 Add editor
                             </h1>

@@ -7,6 +7,7 @@ import AddNewspaper from "../../components/modal/AddNewspaper";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { NavLink } from "react-router-dom";
 import GetArticleStatus from "../../components/GetArticleStatus";
+import Button from "../../components/form/Button";
 
 
 const NewspapersPage: React.FC = () => {
@@ -75,27 +76,26 @@ const NewspapersPage: React.FC = () => {
                 setOpenModal={setOpenNewModal}
             /> 
 
-            <div className="px-12">
+            <div className="px-6 md:px-12">
 
-                <div className="pt-8 pb-16 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         Newspapers
                     </h1>
 
                     <div>
-                        <button 
+
+                        <Button 
+                            type="save"
+                            title="Add new"
                             onClick={toggleAddNewModal}
-                            className="flex items-center space-x-3 px-6 py-2 rounded-md bg-emerald-400 text-white font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
-                        >
-                            <Plus style="w-6 h-6" />
-                            <p>
-                                Add new
-                            </p>
-                        </button>
+                            icon={<Plus style="w-5 h-5 ml-2" />}
+                        />
+
                     </div>
                 </div>
 
-                <div className="pb-12">
+                <div className="hidden md:block pb-12">
                     <div className="flex items-center space-x-2 pb-4 px-6">
                         <h1 className="text-2xl font-semibold">
                             Guide
@@ -124,22 +124,22 @@ const NewspapersPage: React.FC = () => {
                     <table className="mx-auto w-full text-left shadow-sm border border-slate-200">
                         <thead className="text-sm uppercase bg-slate-900 text-white">
                             <tr>
-                                <th scope="col" className="px-6 py-3 rounded-tl-lg">
-                                    Provider
+                                <th scope="col" className="hidden md:table-cell px-6 py-3 rounded-tl-lg">
+                                    Logo
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="rounded-tl-lg md:rounded-tl-none px-6 py-3">
                                     Full name
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="hidden md:table-cell px-6 py-3">
                                     Base url
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="hidden md:table-cell px-6 py-3">
                                     Start url
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="table-cell px-6 py-3">
                                     Status
                                 </th>
-                                <th scope="col" className="px-6 py-3 rounded-tr-lg">
+                                <th scope="col" className="table-cell px-6 py-3 rounded-tr-lg">
                                     <span className="sr-only">Edit</span>
                                 </th>
                             </tr>
@@ -154,6 +154,7 @@ const NewspapersPage: React.FC = () => {
                                         start_url={newspaper.start_url}
                                         full_name={newspaper.full_name}
                                         article_count={newspaper.article_count}
+                                        logo={newspaper.logo}
                                     />
                                 })
                             }
@@ -183,20 +184,23 @@ const GuideInfo: React.FC<NewspaperGuideInfo> = ({ name, description }) => {
     );
 }
 
-const NewspaperRow: React.FC<Newspaper> = ({ provider, base_url, start_url, full_name, article_count }) => {
+const NewspaperRow: React.FC<Newspaper> = ({ provider, base_url, start_url, full_name, article_count, logo }) => {
     return (
         <>
             <tr className="bg-white border-b">
-                <th scope="row" className="px-6 py-4 font-medium">
-                    { provider }
+                <th scope="row" className="hidden md:table-cell px-6 py-4">
+                    <img 
+                        className="w-20"
+                        src={logo}
+                    />
                 </th>
                 <td className="px-6 py-4">
                     { full_name }
                 </td>
-                <td className="px-6 py-4">
+                <td className="hidden md:table-cell px-6 py-4">
                     { base_url }
                 </td>
-                <td className="px-6 py-4">
+                <td className="hidden md:table-cell px-6 py-4">
                     { start_url }
                 </td>
                 <td className="px-6 py-4">

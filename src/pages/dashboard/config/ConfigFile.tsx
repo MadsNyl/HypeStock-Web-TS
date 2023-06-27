@@ -6,6 +6,7 @@ import Download from "../../../icons/Download";
 import TrashCan from "../../../icons/TrashCan";
 import useAuth from "../../../hooks/useAuth";
 import isAdmin from "../../../utils/isAdmin";
+import Button from "../../../components/form/Button";
 
 
 const ConfigFilePage: React.FC = () => {
@@ -202,15 +203,12 @@ const ConfigFilePage: React.FC = () => {
                             <form
                                 onSubmit={deleteConfigFile}
                             >
-                                <button
+                                <Button 
+                                    title="Delete"
+                                    type="basic"
                                     disabled={!isAdmin(auth.role)}
-                                    className={(!isAdmin(auth.role) ? "border-slate-300 bg-slate-300 text-slate-900" : "bg-black border-black text-white") + " px-4 py-2 rounded-md  border  flex items-center space-x-2 transition hover:bg-slate-300 hover:text-slate-900 text-lg font-medium hover:border-slate-300"}
-                                >
-                                    <TrashCan style="w-6 h-6" />
-                                    <p>
-                                        Delete
-                                    </p>
-                                </button>
+                                    icon={<TrashCan style="w-6 h-6 ml-2" />}
+                                />
                             </form>
                         </div>
                     </div>

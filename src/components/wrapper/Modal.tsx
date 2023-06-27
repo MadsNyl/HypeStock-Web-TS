@@ -20,7 +20,7 @@ const Modal: React.FC<ModalType> = ({ children, openModal, setOpenModal }) => {
                   ? <></>  
                   : 
                     <div className="fixed bg-slate-900 bg-opacity-30 flex w-screen h-screen justify-center items-center">
-                        <div className="-ml-60 relative max-w-4xl w-full px-12 py-6 rounded-md bg-white border border-slate-200">
+                        <div className="mx-6 md:-ml-60 relative max-w-4xl w-full px-12 py-6 rounded-md bg-white border border-slate-200">
                             <button 
                                 onClick={() => setOpenModal(false)}
                                 className="absolute top-2 right-2"

@@ -5,6 +5,7 @@ import Search from "../../icons/Search";
 import Ticker from "../../types/Ticker";
 import Plus from "../../icons/Plus";
 import Snackbar from "../../components/Snackbar";
+import Button from "../../components/form/Button";
 
 
 const AddHomographPage: React.FC = () => {
@@ -94,9 +95,9 @@ const AddHomographPage: React.FC = () => {
                 message="Homograph added."
             />
 
-            <div className="px-12">
-                <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+            <div className="px-6 md:px-12">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         Add homograph
                     </h1>
 
@@ -105,7 +106,7 @@ const AddHomographPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-between items-baseline pb-24">
+                <div className="space-y-4 md:space-y-0 md:flex justify-between items-baseline pb-24">
 
                     <div className="max-w-sm w-full bg-white rounded-md shadow-sm border border-slate-200 px-6 py-4">
                         <h1 className="text-xl font-semibold pb-12 text-center">
@@ -161,8 +162,8 @@ const AddHomographPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="w-full bg-white rounded-md shadow-sm px-12 py-6 border border-slate-200 flex justify-between space-x-20">
-                    <div className="max-w-md w-full">
+                <div className="w-full bg-white rounded-md shadow-sm px-12 py-6 border border-slate-200 md:flex justify-between md:space-x-20">
+                    <div className="hidden md:block max-w-md w-full">
                         <div className="pb-12">
                             <h1 className="text-xl font-semibold pb-6">
                                 Description
@@ -173,21 +174,17 @@ const AddHomographPage: React.FC = () => {
                             </p>
                         </div>
 
-                        <div>
-                            <button 
+                        <div className="w-36">
+                            <Button 
+                                title="Add"
+                                type="save"
                                 onClick={add}
                                 disabled={saveDisabled}
-                                className={
-                                    (saveDisabled ? "bg-slate-300 text-slate-900" : "text-white bg-emerald-500") + 
-                                    " px-12 py-2 rounded-md font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
-                                }
-                            >
-                                Add
-                            </button>
+                            />
                         </div>
                     </div>
 
-                    <div className="w-full">
+                    <div className="w-full space-y-4 md:space-y-0">
                         <textarea
                             className="focus:outline-none border border-gray-300 rounded-md px-4 py-2 w-full h-52"
                             onChange={e => setDescription(e.target.value)}
@@ -197,6 +194,14 @@ const AddHomographPage: React.FC = () => {
                         >
 
                         </textarea>
+                        <div className="md:hidden">
+                            <Button 
+                                title="Add"
+                                type="save"
+                                onClick={add}
+                                disabled={saveDisabled}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

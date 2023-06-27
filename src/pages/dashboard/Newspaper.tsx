@@ -8,6 +8,7 @@ import DeleteNewspaper from "../../components/modal/DeleteNewspaper";
 import CountDate from "../../types/CountDate";
 import LineChart from "../../components/chart/LineChart";
 import Snackbar from "../../components/Snackbar";
+import Button from "../../components/form/Button";
 
 
 const NewspaperPage: React.FC = () => {
@@ -89,26 +90,23 @@ const NewspaperPage: React.FC = () => {
                 newspaper={newspaper}
             />
 
-            <div className="px-12">
-                <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+            <div className="px-6 md:px-12">
+                <div className="pt-20 pb-16 md:pt-8 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         { newspaper?.full_name }
                     </h1>
 
                     <div>
-                        <button 
+                        <Button 
+                            type="basic"
+                            title="Delete"
+                            icon={<TrashCan style="w-5 h-5 md:w-6 md:h-6 ml-2" />}
                             onClick={() => setOpenModal(true)}
-                            className="flex items-center space-x-3 px-6 py-2 rounded-md bg-black text-white font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
-                        >
-                            <TrashCan style="w-6 h-6" />
-                            <p>
-                                Delete
-                            </p>
-                        </button>
+                        />
                     </div>
                 </div>
 
-                <div className="flex justify-between space-x-6">
+                <div className="md:flex justify-between md:space-x-6 space-y-4 md:space-y-0">
                     <div className="max-w-md w-full bg-white border border-slate-200 rounded-md shadow-sm px-12 py-6">
                         <form
                             onSubmit={update}
@@ -179,39 +177,46 @@ const NewspaperPage: React.FC = () => {
                             </div>
 
                             <div className="flex justify-end">
-                                <button 
-                                    disabled={isLoading || saveDisabled}
-                                    className={
-                                        (saveDisabled || isLoading ? "bg-slate-300 text-slate-900" : "text-white bg-emerald-500") + 
-                                        " px-12 py-2 rounded-md font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
-                                    }
-                                >
-                                    Save
-                                </button>
+
+                                <div className="w-36">
+                                    <Button 
+                                        type="save"
+                                        title="Save"
+                                        disabled={isLoading || saveDisabled}
+                                    />
+                                </div>
                             </div>
                         </form>
                     </div>
 
                     <div className="w-full space-y-6">
-                        <div className="flex justify-between items-center w-full bg-white border border-slate-200 rounded-md shadow-sm px-12 py-6">
+                        <div className="flex justify-between items-center w-full bg-white border border-slate-200 rounded-md shadow-sm px-6 md:px-12 py-2 md:py-6">
                             <div className="flex items-center space-x-4">
-                                <h1 className="text-2xl font-semibold">
+                                <h1 className="text-xl md:text-2xl font-semibold">
                                     Status:
                                 </h1>
-                                <GetArticleStatus 
-                                    article_count={Number(newspaper?.article_count)}
-                                    size="md"
-                                />
+                                <div className="md:hidden">
+                                    <GetArticleStatus 
+                                        article_count={Number(newspaper?.article_count)}
+                                        size="sm"
+                                    />
+                                </div>
+                                <div className="hidden md:block">
+                                    <GetArticleStatus 
+                                        article_count={Number(newspaper?.article_count)}
+                                        size="md"
+                                    />
+                                </div>
                             </div>
 
                             <div>
-                                <h1 className="text-lg font-semibold">
-                                    Articles collected: <span className="text-emerald-500 font-bold">{ newspaper?.article_count }</span>
+                                <h1 className="text-sm md:text-lg font-semibold">
+                                    Articles collected last week: <span className="text-emerald-500 font-bold">{ newspaper?.article_count }</span>
                                 </h1>
                             </div>
                         </div>
 
-                        <div className="w-full bg-white rounded-md shadow-sm border border-slate-200 px-2 py-6">
+                        <div className="hidden md:block w-full bg-white rounded-md shadow-sm border border-slate-200 px-2 py-6">
                             <LineChart 
                                 text="Number of articles collected for each hour the last 24 hours"
                                 dataLabel="Number of articles"

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import ArticleBaseData, { defaultArticleBaseData } from "../../types/ArticleBaseDate";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import LineChart from "../../components/chart/LineChart";
+import NavButton from "../../components/form/NavButton";
 
 
 const ArticlesPage: React.FC = () => {
@@ -22,7 +23,6 @@ const ArticlesPage: React.FC = () => {
 
         try {
             const response = await axios.get(`/article/base?days=${days}`);
-            console.log(response?.data)
             setBaseData(response?.data);
         } catch (e) {
 
@@ -58,10 +58,10 @@ const ArticlesPage: React.FC = () => {
 
     return (
         <>
-            <div className="px-12">
+            <div className="px-6 md:px-12">
 
-                <div className="pt-8 pb-16 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         Articles
                     </h1>
 
@@ -70,15 +70,15 @@ const ArticlesPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="pb-24">
-                    <div className="flex items-center space-x-2 pb-8 px-6">
+                <div className="pb-8 md:pb-24">
+                    <div className="flex items-center space-x-2 pb-8 md:px-6">
                         <h1 className="text-2xl font-semibold">
                             Stats
                         </h1>
                         <ChartBar style="w-7 h-7 text-emerald-500" />
                     </div>
 
-                    <div className="grid grid-cols-3 gap-12 pb-12">
+                    <div className="grid md:grid-cols-3 gap-4 md:gap-12 pb-12">
                         {
                             articlesTracking.map((item, index) => {
                                 return <ArticleTracking 
@@ -90,7 +90,7 @@ const ArticlesPage: React.FC = () => {
                         }
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="hidden md:grid grid-cols-2 gap-4">
                         <div className="w-full bg-white rounded-md shadow-sm border border-slate-200 px-2 py-6">
                             <LineChart 
                                 text="Number of articles collected for each hour the last 24 hours"
@@ -111,14 +111,14 @@ const ArticlesPage: React.FC = () => {
                 </div>
 
                 <div className="pb-24">
-                    <div className="flex items-center space-x-2 pb-8 px-6">
+                    <div className="flex items-center space-x-2 pb-8 md:px-6">
                         <h1 className="text-2xl font-semibold">
                             Config
                         </h1>
                         <Settings style="w-7 h-7 text-emerald-500" />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-12">
+                    <div className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-12">
                         <div className="rounded-md bg-white border border-slate-200 shadow-sm px-6 py-4">
                             <div className="pb-6">
                                 <h1 className="text-xl font-semibold">
@@ -143,16 +143,12 @@ const ArticlesPage: React.FC = () => {
                                     </h1>
                                 </div>
                                 <div>
-                                    <NavLink
-                                        to={"/dashboard/articles/homographs"}
-                                    >
-                                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white transition duration-150 ease-in-out hover:bg-slate-300 hover:text-slate-900">
-                                            <h1 className="">
-                                                See more
-                                            </h1>
-                                            <RightArrow style="w-4 h-4" />
-                                        </div>
-                                    </NavLink>
+                                    <NavButton 
+                                        type="basic"
+                                        path="/dashboard/articles/homographs"
+                                        icon={<RightArrow style="w-4 h-4 ml-1" />}
+                                        title="See more"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -172,16 +168,12 @@ const ArticlesPage: React.FC = () => {
 
                             <div className="flex items-center justify-end">
                                 <div>
-                                    <NavLink
-                                        to={"/dashboard/articles/config"}
-                                    >
-                                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white transition duration-150 ease-in-out hover:bg-slate-300 hover:text-slate-900">
-                                            <h1 className="">
-                                                See more
-                                            </h1>
-                                            <RightArrow style="w-4 h-4" />
-                                        </div>
-                                    </NavLink>
+                                    <NavButton 
+                                        type="basic"
+                                        path="/dashboard/config/article"
+                                        icon={<RightArrow style="w-4 h-4 ml-1" />}
+                                        title="See more"
+                                    />
                                 </div>
                             </div>
                         </div>

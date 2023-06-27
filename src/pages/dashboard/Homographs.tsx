@@ -3,6 +3,9 @@ import Homograph from "../../types/Homograph";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Plus from "../../icons/Plus";
 import { NavLink } from "react-router-dom";
+import ChevronDoubleLeft from "../../icons/ChevronDoubleLeft";
+import ChevronDoubleRight from "../../icons/ChevronDoubleRight";
+import NavButton from "../../components/form/NavButton";
 
 
 const HomographsPage: React.FC = () => {
@@ -10,14 +13,20 @@ const HomographsPage: React.FC = () => {
     const axios = useAxiosPrivate();
 
     const [homographs, setHomographs] = useState<Homograph[]>([]);
-    const [_isLoading, setLoading] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [page, setPage] = useState<number>(1);
+    const [nextPage, setNextPage] = useState<string>("");
+    const [prevPage, setPrevPage] = useState<string>("");
 
-    const getHomographs = async () => {
+    const getHomographs = async (url: string) => {
         setLoading(true);
 
         try {
-            const response = await axios.get("/homograph");
+            const response = await axios.get(url);
+
             setHomographs(response?.data.homographs);
+            setNextPage(response?.data.next_page);
+            setPrevPage(response?.data.prev_page);
         } catch (e) {
 
         } finally {
@@ -26,32 +35,29 @@ const HomographsPage: React.FC = () => {
     }
 
     useEffect(() => {
-        getHomographs();
+        getHomographs(`/homograph?limit=10&page=${page}`);
     }, []);
 
     return (
         <>
-            <div className="px-12">
+            <div className="px-6 md:px-12">
 
-                <div className="pt-8 pb-16 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         Homographs
                     </h1>
 
                     <div>
-                        <NavLink 
-                            to={"/dashboard/articles/homographs/add"}
-                            className="flex items-center space-x-3 px-6 py-2 rounded-md bg-emerald-400 text-white font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
-                        >
-                            <Plus style="w-6 h-6" />
-                            <p>
-                                Add new
-                            </p>
-                        </NavLink>
+                        <NavButton 
+                            path="/dashboard/articles/homographs/add"
+                            title="Add new"
+                            type="save"
+                            icon={<Plus style="w-6 h-6 ml-2" />}
+                        />
                     </div>
                 </div>
 
-                <div className="pb-24">
+                <div className="pb-24 space-y-6">
                     <table className="mx-auto w-full text-left shadow-sm border border-slate-200">
                         <thead className="text-sm uppercase bg-slate-900 text-white">
                             <tr>
@@ -61,7 +67,7 @@ const HomographsPage: React.FC = () => {
                                 <th scope="col" className="px-6 py-3">
                                     Word
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="hidden md:table-cell px-6 py-3">
                                     Description
                                 </th>
                                 <th scope="col" className="px-6 py-3 rounded-tr-lg">
@@ -84,6 +90,36 @@ const HomographsPage: React.FC = () => {
                         </tbody>
 
                     </table>
+
+                    <div className="flex items-center justify-center space-x-12">
+                        <button
+                            onClick={() => {
+                                getHomographs(prevPage);
+                                setPage(page - 1);
+                            }}
+                            disabled={!prevPage}
+                            className={(!prevPage ? "text-slate-400" : "") + ""}
+                        >
+                            <ChevronDoubleLeft style="w-6 h-6" />
+                        </button>
+
+                        <div>
+                            <h1 className="text-xl font-semibold">
+                                { page }
+                            </h1>
+                        </div>
+
+                        <button
+                            onClick={() => {
+                                getHomographs(nextPage);
+                                setPage(page + 1);
+                            }}
+                            disabled={!nextPage}
+                            className={(!nextPage ? "text-slate-400" : "") + ""}
+                        >
+                            <ChevronDoubleRight style="w-6 h-6" />
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -101,7 +137,7 @@ const HomographRow: React.FC<Homograph> = ({ id, word, description }) => {
             <td className="px-6 py-4">
                 { word }
             </td>
-            <td className="px-6 py-4">
+            <td className="hidden md:table-cell px-6 py-4">
                 { description }
             </td>
             <td className="px-6 py-4 text-right">

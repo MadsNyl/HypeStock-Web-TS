@@ -7,6 +7,7 @@ import TrashCan from "../../icons/TrashCan";
 import DeleteHomograph from "../../components/modal/DeleteHomograph";
 import { AxiosError } from "axios";
 import Snackbar from "../../components/Snackbar";
+import Button from "../../components/form/Button";
 
 
 const HomographDetails: React.FC = () => {
@@ -110,34 +111,31 @@ const HomographDetails: React.FC = () => {
                 homograph={homograph}
             />
 
-            <div className="px-12">
-                <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
-                    <div className="space-y-6 max-w-md w-full">
-                        <h1 className="text-4xl font-bold">
+            <div className="px-6 md:px-12">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <div className="space-y-4 md:space-y-6 w-40 md:max-w-md md:w-full">
+                        <h1 className="text-3xl md:text-4xl font-bold">
                             { ticker.symbol } - <span className="uppercase text-2xl">{ ticker.exchange }</span>
                         </h1>
-                        <h1 className="text-xl font-medium">
+                        <h1 className="md:text-xl font-medium">
                             { ticker.name }
                         </h1>
                     </div>
                     
                     <div>
-                        <button 
+                        <Button 
+                            type="basic"
                             onClick={() => setOpenModal(true)}
-                            className="flex items-center space-x-3 px-6 py-2 rounded-md bg-black text-white font-semibold duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"
-                        >
-                            <TrashCan style="w-6 h-6" />
-                            <p>
-                                Delete
-                            </p>
-                        </button>
+                            title="Delete"
+                            icon={<TrashCan style="w-5 h-5 md:w-6 md:h-6 ml-2" />}
+                        />
                     </div>
 
                 </div>
 
                 <div className="max-w-2xl w-full mx-auto">
-                    <div className="pb-2 px-6">
-                        <h1 className="text-3xl font-semibold">
+                    <div className="pb-2 md:px-6">
+                        <h1 className="text-2xl md:text-3xl font-semibold">
                             Edit description
                         </h1>
                     </div>

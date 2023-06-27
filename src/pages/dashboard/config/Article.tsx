@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import Info from "../../../icons/Info";
 import CheckBoxSlider from "../../../components/form/CheckBoxSlider";
 import NumberInput from "../../../components/form/NumberInput";
-import SaveButton from "../../../components/form/SaveButton";
 import Snackbar from "../../../components/Snackbar";
 import isAdmin from "../../../utils/isAdmin";
 import useAuth from "../../../hooks/useAuth";
+import Button from "../../../components/form/Button";
 
 
 const ArticleConfigPage: React.FC = () => {
@@ -100,8 +100,8 @@ const ArticleConfigPage: React.FC = () => {
                 message="Configure file updated."
             />
 
-            <div className="px-12">
-                <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
+            <div className="px-6 md:px-12">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <div className="space-y-2">
                         <h1 className="text-4xl font-bold">
                             Article Configure
@@ -122,7 +122,7 @@ const ArticleConfigPage: React.FC = () => {
 
                 <form 
                     onSubmit={updateConfigure}
-                    className="bg-white border border-slate-200 rounded-md shadow-sm px-12 py-6"
+                    className="bg-white border border-slate-200 rounded-md shadow-sm px-6 md:px-12 py-6"
                 >
 
                     <div className="pb-16 space-y-12">
@@ -139,9 +139,10 @@ const ArticleConfigPage: React.FC = () => {
                     </div>
 
                     <div className="flex justify-end">
-                        <div className="w-40">
-                            <SaveButton 
+                        <div className="w-36">
+                            <Button 
                                 title="Save"
+                                type="save"
                                 disabled={disabled || isAdminLocked}
                             />
                         </div>
@@ -159,12 +160,12 @@ const FormField: React.FC<{ title: string, description: string, inputField: Reac
 
     return (
         <div className="flex items-center space-x-20">
-            <div className="flex items-center space-x-4 max-w-xs w-full">
-                <h1 className="text-xl font-bold">
+            <div className="flex items-center space-x-4 w-44 md:max-w-xs md:w-full">
+                <h1 className="md:text-xl font-bold">
                     { title }
                 </h1>
                 <button
-                    className="relative"
+                    className="relative hidden md:inline"
                     onMouseEnter={() => setShowInfo(true)}
                     onMouseLeave={() => setShowInfo(false)}
                 >
@@ -184,7 +185,7 @@ const FormField: React.FC<{ title: string, description: string, inputField: Reac
                 </button>
             </div>
 
-            <div className="">
+            <div>
                 { inputField }
             </div>
         </div>

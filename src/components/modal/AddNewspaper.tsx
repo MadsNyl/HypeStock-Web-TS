@@ -1,5 +1,6 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import ModalType from "../../types/Modal";
+import Button from "../form/Button";
 import Modal from "../wrapper/Modal";
 import { useState } from "react";
 
@@ -109,13 +110,12 @@ const AddNewspaper: React.FC<ModalType> = ({ openModal, setOpenModal }) => {
                         />
                     </div>
 
-                    <div>
-                        <button 
+                    <div className="max-w-sm w-full">
+                        <Button 
+                            type="save"
+                            title="Add newspaper"
                             disabled={isLoading}
-                            className={(isLoading ? "bg-slate-100 text-gray-900" : "") + " max-w-sm w-full py-3 rounded-md bg-emerald-400 text-white font-semibold text-lg"}
-                        >
-                            Add newspaper
-                        </button>
+                        />
                     </div>
                 </form>
             </div>

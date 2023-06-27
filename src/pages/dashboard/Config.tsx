@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
 import RightArrow from "../../icons/RightArrow";
+import NavButton from "../../components/form/NavButton";
 
 
 const ConfigPage: React.FC = () => {
@@ -24,9 +24,9 @@ const ConfigPage: React.FC = () => {
 
     return (
         <>
-            <div className="px-12">
-                <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-4xl font-bold">
+            <div className="px-6 md:px-12">
+                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
+                    <h1 className="text-3xl md:text-4xl font-bold">
                         Configure
                     </h1>
 
@@ -35,11 +35,7 @@ const ConfigPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div>
-
-                </div>
-
-                <div className="grid grid-cols-2 gap-8">
+                <div className="pb-24 space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
                     {
                         configures.map((item, index) => {
                             return <Configure 
@@ -79,17 +75,14 @@ const Configure: React.FC<ConfigureComponent> = ({ title, description, path }) =
             </div>
 
             <div className="flex items-center justify-end">
+
                 <div>
-                    <NavLink
-                        to={path}
-                    >
-                        <div className="flex items-center space-x-1 px-3 py-1 rounded-md bg-black text-white transition duration-150 ease-in-out hover:bg-slate-300 hover:text-slate-900">
-                            <h1 className="">
-                                See more
-                            </h1>
-                            <RightArrow style="w-4 h-4" />
-                        </div>
-                    </NavLink>
+                    <NavButton 
+                        type="basic"
+                        path={path}
+                        title="See more"
+                        icon={<RightArrow style="w-4 h-4 ml-1" />}
+                    />
                 </div>
             </div>
         </div>

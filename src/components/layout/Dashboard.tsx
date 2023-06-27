@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
     const logout = useLogout();
     const navigate = useNavigate();
 
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(true);
 
     const handleLogout = async () => {
         await logout();
@@ -63,12 +63,12 @@ const Dashboard: React.FC = () => {
 
     const NavigationTab: React.FC<Navigation> = ({ name, path, icon, roles }) => {
         return (
-            <div className="w-full">
+            <div className="md:w-full">
                 <NavLink
                     to={path}
                     className={(
                         isActiveUrl(path)
-                            ? "bg-slate-900 text-white"
+                            ? "bg-emerald-200"
                             : ""
                     ) +
                     (
@@ -78,13 +78,13 @@ const Dashboard: React.FC = () => {
                     ) +
                     (
                         open
-                            ? " space-x-2 px-6"
+                            ? " md:space-x-2 md:px-6 px-2"
                             : " justify-center"
                     ) +
-                    " flex items-center py-2 rounded-md border border-slate-200 bg-slate-50 transition duration-150 ease-in-out hover:bg-slate-900 hover:text-white"}
+                    " flex justify-center md:justify-start items-center py-1 md:py-2 rounded-md transition duration-150 ease-in-out hover:bg-emerald-200"}
                 >
                     { icon }
-                    <p className={(open ? "" : "hidden") + " capitalize"}>
+                    <p className={(open ? "" : "hidden") + " capitalize hidden md:block"}>
                         { name }
                     </p>
                 </NavLink>
@@ -95,7 +95,7 @@ const Dashboard: React.FC = () => {
     return (
         <div className="bg-slate-100 font-sans overflow-x-hidden text-gray-900 relative">
             <div className="flex relative">
-                <div className={(open ? "w-60 px-6" : "w-24 px-2") + " fixed h-screen rounded-r-lg shadow-md bg-white"}>
+                <div className={(open ? "w-60 px-2" : "w-24 px-2") + " hidden md:block md:fixed h-screen rounded-r-lg shadow-md bg-white"}>
 
                     <button 
                         onClick={() => setOpen(!open)}
@@ -117,7 +117,7 @@ const Dashboard: React.FC = () => {
                         </NavLink>
                     </div>
 
-                    <nav className="pt-20 pb-32 space-y-6">
+                    <nav className="pt-20 pb-32 space-y-1">
                         {
                             navigations.map((item, index) => {
                                 return <NavigationTab 
@@ -144,8 +144,41 @@ const Dashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="md:hidden fixed w-full px-6 py-4 bg-white border-b border-b-slate-200 shadow-sm z-10">
+                <div>
+                    <NavLink
+                        to={"/"}
+                        className="text-emerald-500 text-xl font-bold"
+                    >
+                        HypeStock
+                    </NavLink>
+                </div>
+            </div>
+
+            <div className="md:hidden fixed w-full px-6 py-4 bg-white rounded-t-lg border-t bottom-0 border-t-slate-200 shadow-sm z-10">
+                <div className="flex justify-between items-center space-x-2">
+                    {
+                        navigations.map((item, index) => {
+                            return <NavigationTab 
+                                        key={index}
+                                        name={item.name}
+                                        path={item.path}
+                                        icon={item.icon} 
+                                        roles={item.roles}
+                                    />
+                        })
+                    }
+                    <button
+                        onClick={handleLogout}
+                        className="px-2"
+                    >
+                        <Logout style="w-6 h-6" />
+                    </button>
+                </div>
+            </div>
             
-            <div className={(open ? "ml-60" : "ml-24") +  " min-h-screen"}>
+            <div className={(open ? "md:ml-60" : "md:ml-24") +  " min-h-screen"}>
                 <div className="w-full relative">
                     <Outlet />
                 </div>
