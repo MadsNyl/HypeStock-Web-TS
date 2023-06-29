@@ -38,7 +38,7 @@ const AddNewspaper: React.FC<ModalType> = ({ openModal, setOpenModal }) => {
 
             window.location.reload();
         } catch (e) {
-            
+            console.log(e)
         } finally {
             setLoading(false);
         }

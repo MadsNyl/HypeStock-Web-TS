@@ -6,6 +6,8 @@ import Ticker from "../../types/Ticker";
 import Plus from "../../icons/Plus";
 import Snackbar from "../../components/Snackbar";
 import Button from "../../components/form/Button";
+import DashboardPage from "../../components/wrapper/DashboardPage";
+import DashboardHeading from "../../components/wrapper/DashboardHeading";
 
 
 const AddHomographPage: React.FC = () => {
@@ -13,6 +15,7 @@ const AddHomographPage: React.FC = () => {
     const axios = useAxiosPrivate();
 
     const [_isLoading, setLoading] = useState<boolean>(false);
+    const [_isSearchLoading, setSearchLoading] = useState<boolean>(false);
     const [word, setWord] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [tickers, setTickers] = useState<Ticker[]>([]);
@@ -39,7 +42,6 @@ const AddHomographPage: React.FC = () => {
             setShowSnackbar(true);
         } catch (error) {
             if (error instanceof AxiosError) {
-                console.log(error.response)
                 if (!error?.response) {
                     setErrMsg("No server response.");
                 } else {
@@ -52,7 +54,7 @@ const AddHomographPage: React.FC = () => {
     }
     
     const search = async () => {
-        setLoading(true);
+        setSearchLoading(true);
 
         
         if (!searchWord.length) {
@@ -67,7 +69,7 @@ const AddHomographPage: React.FC = () => {
         } catch (error) {
 
         } finally {
-            setLoading(false);
+            setSearchLoading(false);
         }
     }
 
@@ -95,16 +97,11 @@ const AddHomographPage: React.FC = () => {
                 message="Homograph added."
             />
 
-            <div className="px-6 md:px-12">
-                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-3xl md:text-4xl font-bold">
-                        Add homograph
-                    </h1>
-
-                    <div>
-
-                    </div>
-                </div>
+            <DashboardPage>
+                <DashboardHeading 
+                    title="Add homograph"
+                    goBack={true}
+                />
 
                 <div className="space-y-4 md:space-y-0 md:flex justify-between items-baseline pb-24">
 
@@ -137,7 +134,7 @@ const AddHomographPage: React.FC = () => {
                                 <Search style="w-6 h-6" />
                             </div>
                                 
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-3 gap-4 h-20">
                                 {
                                     tickers.map((item, index) => {
                                         return <button 
@@ -147,7 +144,7 @@ const AddHomographPage: React.FC = () => {
                                                         setSearchWord("");
                                                     }}
                                                     key={index} 
-                                                    className="relative bg-white rounded-md shadow-sm border border-slate-200 px-4 py-2 transition duration-150 ease-in-out hover:text-white hover:bg-black"
+                                                    className="h-10 relative bg-white rounded-md shadow-sm border border-slate-200 px-4 py-2 transition duration-150 ease-in-out hover:text-white hover:bg-black"
                                                 >
                                                     <h1 className="text-center font-medium">
                                                         { item.symbol }
@@ -204,7 +201,7 @@ const AddHomographPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </DashboardPage>
         </>
     );
 }

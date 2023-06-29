@@ -1,5 +1,6 @@
 import RightArrow from "../../icons/RightArrow";
 import NavButton from "../../components/form/NavButton";
+import DashboardPage from "../../components/wrapper/DashboardPage";
 
 
 const ConfigPage: React.FC = () => {
@@ -24,7 +25,7 @@ const ConfigPage: React.FC = () => {
 
     return (
         <>
-            <div className="px-6 md:px-12">
+            <DashboardPage>
                 <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-3xl md:text-4xl font-bold">
                         Configure
@@ -47,7 +48,7 @@ const ConfigPage: React.FC = () => {
                         })
                     }
                 </div>
-            </div>
+            </DashboardPage>
         </>
     );
 }

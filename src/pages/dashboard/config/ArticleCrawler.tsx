@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import ConfigFile from "../../../types/ConfigFile";
 import Snackbar from "../../../components/Snackbar";
+import DashboardPage from "../../../components/wrapper/DashboardPage";
 
 
 const ArticleCrawlerConfigPage: React.FC = () => {
@@ -75,7 +76,7 @@ const ArticleCrawlerConfigPage: React.FC = () => {
                 success={true}
             />
 
-            <div className="px-12">
+            <DashboardPage>
                 <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-4xl font-bold">
                         ArticleCrawler Config
@@ -141,7 +142,7 @@ const ArticleCrawlerConfigPage: React.FC = () => {
 
                     </div>
                 }
-            </div>
+            </DashboardPage>
         </>
     );
 } 

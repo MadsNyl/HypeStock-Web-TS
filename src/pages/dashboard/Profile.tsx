@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import Profile from "../../icons/Profile";
 import Snackbar from "../../components/Snackbar";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import DashboardPage from "../../components/wrapper/DashboardPage";
 
 
 const ProfilePage: React.FC = () => {
@@ -49,7 +50,7 @@ const ProfilePage: React.FC = () => {
                 setShowBar={setShowSnackbar}
             />
 
-            <div className="px-6 md:px-12">
+            <DashboardPage>
                 <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-3xl md:text-4xl font-bold">
                         My Profile
@@ -142,7 +143,7 @@ const ProfilePage: React.FC = () => {
                         </div>
                     </form>
                 </div>
-            </div>
+            </DashboardPage>
         </>
     );
 }

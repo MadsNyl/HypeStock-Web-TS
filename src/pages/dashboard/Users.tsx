@@ -8,6 +8,9 @@ import { AxiosError } from "axios";
 import UserModal from "../../types/UserModal";
 import EditUser from "../../components/modal/EditUser";
 import Snackbar from "../../components/Snackbar";
+import DashboardPage from "../../components/wrapper/DashboardPage";
+import LoadingScreen from "../../components/loading/Loading";
+import DashboardHeading from "../../components/wrapper/DashboardHeading";
 
 
 const UsersPage: React.FC = () => {
@@ -18,6 +21,7 @@ const UsersPage: React.FC = () => {
     const [password, setPassword] = useState<string>("");
     const [rePassword, setRePassword] = useState<string>("");
     const [isLoading, setLoading] = useState<boolean>(false);
+    const [isCreatedLoading, setCreatedLoading] = useState<boolean>(false);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
     const [users, setUsers] = useState<User[]>([])
     const [errMsg, setErrMsg] = useState<string>("");
@@ -25,6 +29,7 @@ const UsersPage: React.FC = () => {
     const [editUser, setEditUser] = useState<User>(defaultUser);
 
     const getUsers = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(`/user/role?role=${Role.Editor}`);
             
@@ -37,12 +42,14 @@ const UsersPage: React.FC = () => {
                     setErrMsg(error.response.data);
                 }
             }
-        } 
+        } finally {
+            setLoading(false);
+        }
     }
 
     const createEditor = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true);
+        setCreatedLoading(true);
         
         try {
             await axios.post(
@@ -59,13 +66,17 @@ const UsersPage: React.FC = () => {
         } catch (error) {
 
         } finally {
-            setLoading(false);
+            setCreatedLoading(false);
         }
     }
 
     useEffect(() => {
         getUsers();
     },[]);
+
+    if (isLoading) {
+        return <LoadingScreen />
+    }
 
     return (
         <>
@@ -83,15 +94,12 @@ const UsersPage: React.FC = () => {
                 user={editUser}
             />
 
-            <div className="px-6 md:px-12">
-                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
-                    <h1 className="text-3xl md:text-4xl font-bold">
-                        Users
-                    </h1>
-
-                    <div>
-                    </div>
-                </div>
+            <DashboardPage>
+                
+                <DashboardHeading 
+                    title="Users"
+                    goBack={false}
+                />
 
                 <div className="pb-24 md:flex md:justify-between space-y-16 md:space-y-0">
                     <div className="max-w-lg w-full">
@@ -207,8 +215,8 @@ const UsersPage: React.FC = () => {
 
                             <div>
                             <button 
-                                disabled={isLoading}
-                                className={(isLoading ? "bg-slate-300 text-gray-900" : "") + " max-w-sm w-full py-2 rounded-md bg-emerald-400 text-white font-semibold text-lg duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"}
+                                disabled={isCreatedLoading}
+                                className={(isCreatedLoading ? "bg-slate-300 text-gray-900" : "") + " max-w-sm w-full py-2 rounded-md bg-emerald-400 text-white font-semibold text-lg duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"}
                             >
                                 Add editor
                             </button>
@@ -217,7 +225,7 @@ const UsersPage: React.FC = () => {
                     </div>
                 </div>
 
-            </div>
+            </DashboardPage>
         </>
     );
 }

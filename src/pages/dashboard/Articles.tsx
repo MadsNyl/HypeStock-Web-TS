@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import ChartBar from "../../icons/ChartBar";
 import Settings from "../../icons/Settings";
 import ArticleTrackingType from "../../types/ArticleTracking";
@@ -8,6 +7,8 @@ import ArticleBaseData, { defaultArticleBaseData } from "../../types/ArticleBase
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import LineChart from "../../components/chart/LineChart";
 import NavButton from "../../components/form/NavButton";
+import DashboardPage from "../../components/wrapper/DashboardPage";
+import LoadingScreen from "../../components/loading/Loading";
 
 
 const ArticlesPage: React.FC = () => {
@@ -15,7 +16,7 @@ const ArticlesPage: React.FC = () => {
     const axios = useAxiosPrivate();
 
     const [baseData, setBaseData] = useState<ArticleBaseData>(defaultArticleBaseData);
-    const [_isLoading, setLoading] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
     const [days, _setDays] = useState<number>(7);
 
     const getBaseData = async () => {   
@@ -54,11 +55,15 @@ const ArticlesPage: React.FC = () => {
                     ? baseData.total_article_count[0].count
                     : 0
         },
-    ]
+    ];
+
+    if (isLoading) {
+        return <LoadingScreen />
+    }
 
     return (
         <>
-            <div className="px-6 md:px-12">
+            <DashboardPage>
 
                 <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-3xl md:text-4xl font-bold">
@@ -180,7 +185,7 @@ const ArticlesPage: React.FC = () => {
                     </div>
                 </div>
 
-            </div>
+            </DashboardPage>
         </>
     );
 }

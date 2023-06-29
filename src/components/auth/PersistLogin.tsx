@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
+import LoadingScreen from "../loading/Loading";
 
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +32,7 @@ const PersistLogin = () => {
             {!persist
                 ? <Outlet />
                 : isLoading
-                    ? <p>Loading...</p>
+                    ? <LoadingScreen />
                     : <Outlet />
             }
         </>

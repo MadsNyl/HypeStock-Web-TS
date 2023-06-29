@@ -8,6 +8,8 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { NavLink } from "react-router-dom";
 import GetArticleStatus from "../../components/GetArticleStatus";
 import Button from "../../components/form/Button";
+import DashboardPage from "../../components/wrapper/DashboardPage";
+import LoadingScreen from "../../components/loading/Loading";
 
 
 const NewspapersPage: React.FC = () => {
@@ -16,9 +18,11 @@ const NewspapersPage: React.FC = () => {
 
     const [newspapers, setNewspapers] = useState<Newspaper[]>([]);
     const [openNewModal, setOpenNewModal] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(true);
 
 
     const getNewspapers = async () => {
+        setLoading(true);
         try {
             const response = await axios.get("/newspaper");
             const newspapersData = response?.data?.newspapers;
@@ -26,6 +30,8 @@ const NewspapersPage: React.FC = () => {
             setNewspapers(newspapersData);
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -69,6 +75,10 @@ const NewspapersPage: React.FC = () => {
 
     }, [openNewModal]);
 
+    if (isLoading) {
+        return <LoadingScreen />
+    }
+
     return (
         <>
             <AddNewspaper 
@@ -76,7 +86,7 @@ const NewspapersPage: React.FC = () => {
                 setOpenModal={setOpenNewModal}
             /> 
 
-            <div className="px-6 md:px-12">
+            <DashboardPage>
 
                 <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-3xl md:text-4xl font-bold">
@@ -161,7 +171,7 @@ const NewspapersPage: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </DashboardPage>
         </>
     );
 }

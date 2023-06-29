@@ -4,14 +4,7 @@ import ComponentSnackbar from "../types/ComponentSnackbar";
 
 
 const Snackbar: React.FC<ComponentSnackbar> = ({ success, message, showBar, setShowBar }) => {
-
-    if (!showBar) {
-        return (
-            <>
-            </>
-        );
-    }
-
+    
     useEffect(() => {
         if (showBar) {
             setTimeout(() => {
@@ -19,6 +12,13 @@ const Snackbar: React.FC<ComponentSnackbar> = ({ success, message, showBar, setS
             }, 3500);
         }
     }, [showBar]);
+
+    if (!showBar) {
+        return (
+            <>
+            </>
+        );
+    }
 
     return (
         <div className={(success ? "bg-emerald-800 text-white" : "bg-red-800 text-white") + " fixed bottom-0 right-4 max-w-xs w-full rounded-t-md px-4 py-3 flex justify-start"}>

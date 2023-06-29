@@ -9,6 +9,7 @@ import CountDate from "../../types/CountDate";
 import LineChart from "../../components/chart/LineChart";
 import Snackbar from "../../components/Snackbar";
 import Button from "../../components/form/Button";
+import DashboardPage from "../../components/wrapper/DashboardPage";
 
 
 const NewspaperPage: React.FC = () => {
@@ -90,7 +91,7 @@ const NewspaperPage: React.FC = () => {
                 newspaper={newspaper}
             />
 
-            <div className="px-6 md:px-12">
+            <DashboardPage>
                 <div className="pt-20 pb-16 md:pt-8 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-3xl md:text-4xl font-bold">
                         { newspaper?.full_name }
@@ -226,7 +227,7 @@ const NewspaperPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </DashboardPage>
         </>
     );
 }

@@ -8,6 +8,7 @@ import DeleteHomograph from "../../components/modal/DeleteHomograph";
 import { AxiosError } from "axios";
 import Snackbar from "../../components/Snackbar";
 import Button from "../../components/form/Button";
+import DashboardPage from "../../components/wrapper/DashboardPage";
 
 
 const HomographDetails: React.FC = () => {
@@ -111,7 +112,7 @@ const HomographDetails: React.FC = () => {
                 homograph={homograph}
             />
 
-            <div className="px-6 md:px-12">
+            <DashboardPage>
                 <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <div className="space-y-4 md:space-y-6 w-40 md:max-w-md md:w-full">
                         <h1 className="text-3xl md:text-4xl font-bold">
@@ -176,7 +177,7 @@ const HomographDetails: React.FC = () => {
                         </div>
                     </form>
                 </div>
-            </div>
+            </DashboardPage>
         </>
     );
 } 

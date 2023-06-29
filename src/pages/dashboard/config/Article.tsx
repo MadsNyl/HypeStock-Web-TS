@@ -7,6 +7,9 @@ import Snackbar from "../../../components/Snackbar";
 import isAdmin from "../../../utils/isAdmin";
 import useAuth from "../../../hooks/useAuth";
 import Button from "../../../components/form/Button";
+import DashboardPage from "../../../components/wrapper/DashboardPage";
+import LoadingScreen from "../../../components/loading/Loading";
+import DashboardHeading from "../../../components/wrapper/DashboardHeading";
 
 
 const ArticleConfigPage: React.FC = () => {
@@ -15,6 +18,7 @@ const ArticleConfigPage: React.FC = () => {
     const { auth } = useAuth();
 
     const [_configure, setConfigure] = useState(null);
+    const [isLoading, setLoading] = useState<boolean>(true);
     const [limit, setLimit] = useState<string>("");
     const [async, setAsync] = useState<boolean>(false);
     const [disabled, setDisabled] = useState<boolean>(true);
@@ -23,6 +27,7 @@ const ArticleConfigPage: React.FC = () => {
 
 
     const getConfigure = async () => {
+        setLoading(true);
         try {
             const response = await axios.get("/config/section?key=article");
             const data = response?.data;
@@ -32,6 +37,8 @@ const ArticleConfigPage: React.FC = () => {
             setAsync(data.async);
         } catch (error) {
 
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -89,6 +96,9 @@ const ArticleConfigPage: React.FC = () => {
         }
     ];
 
+    if (isLoading) {
+        return <LoadingScreen />
+    }
 
     return (
         <>
@@ -100,13 +110,14 @@ const ArticleConfigPage: React.FC = () => {
                 message="Configure file updated."
             />
 
-            <div className="px-6 md:px-12">
-                <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
-                    <div className="space-y-2">
-                        <h1 className="text-4xl font-bold">
-                            Article Configure
-                        </h1>
-                        <h1 className="pl-6 text-lg font-semibold">
+            <DashboardPage>
+
+                <DashboardHeading
+                    title="Article Configure"
+                    goBack={true}
+                >
+                    <div>
+                        <h1 className="text-lg font-semibold text-yellow-600">
                             {
                                 isAdminLocked
                                     ? "Read access only"
@@ -114,11 +125,7 @@ const ArticleConfigPage: React.FC = () => {
                             }
                         </h1>
                     </div>
-
-                    <div>
-
-                    </div>
-                </div>
+                </DashboardHeading>
 
                 <form 
                     onSubmit={updateConfigure}
@@ -148,7 +155,7 @@ const ArticleConfigPage: React.FC = () => {
                         </div>
                     </div>
                 </form>
-            </div>
+            </DashboardPage>
         </>
     );
 }

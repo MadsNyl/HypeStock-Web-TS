@@ -7,6 +7,7 @@ import TrashCan from "../../../icons/TrashCan";
 import useAuth from "../../../hooks/useAuth";
 import isAdmin from "../../../utils/isAdmin";
 import Button from "../../../components/form/Button";
+import DashboardPage from "../../../components/wrapper/DashboardPage";
 
 
 const ConfigFilePage: React.FC = () => {
@@ -88,7 +89,7 @@ const ConfigFilePage: React.FC = () => {
                     success={true}
                 />
 
-                <div className="px-12">
+                <DashboardPage>
                     <div className="pt-8 pb-24 flex items-center justify-between mx-auto w-full">
                         <h1 className="text-4xl font-bold">
                             Configure File
@@ -144,7 +145,7 @@ const ConfigFilePage: React.FC = () => {
                             </div>
                         </div>
                     </div> 
-                </div>
+                </DashboardPage>
             </>
         );
     }

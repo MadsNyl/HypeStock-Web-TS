@@ -19,6 +19,9 @@ import ArticleCrawlerConfigPage from "./pages/dashboard/config/ArticleCrawler";
 import ConfigPage from "./pages/dashboard/Config";
 import ConfigFilePage from "./pages/dashboard/config/ConfigFile";
 import ArticleConfigPage from "./pages/dashboard/config/Article";
+import BetaPage from "./pages/dashboard/Beta";
+import FilingPage from "./pages/dashboard/Filing";
+import StatementPage from "./pages/dashboard/Statement";
 
 function App() {
 
@@ -31,8 +34,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
             </Route>
-            <Route element={<PersistLogin />}>
               <Route element={<Dashboard />}>
+                <Route element={<PersistLogin />}>
                   <Route element={<RequireAuth allowedRoles={[Role.Admin, Role.Editor, Role.User]} />}>
                     <Route path="/dashboard/profile" element={<ProfilePage />} />
                   </Route>
@@ -47,12 +50,15 @@ function App() {
                     <Route path="/dashboard/config" element={<ConfigPage />} />
                     <Route path="/dashboard/config/file" element={<ConfigFilePage />} />
                     <Route path="/dashboard/config/article" element={<ArticleConfigPage />} />
+                    <Route path="/dashboard/beta" element={<BetaPage />} />
+                    <Route path="/dashboard/filings/:id" element={<FilingPage />} />
+                    <Route path="/dashboard/statements/:id" element={<StatementPage />} />
                   </Route>
                   <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
                     <Route path="/dashboard/users" element={<UsersPage />} />
                   </Route>
+                </Route>
               </Route>
-            </Route>
           </Routes> 
         </AuthProvider>
       </BrowserRouter>

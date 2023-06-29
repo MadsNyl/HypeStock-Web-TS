@@ -11,17 +11,13 @@ import Users from "../../icons/Users";
 import Role from "../../enums/Role";
 import isRoleLocked from "../../utils/isRoleLocked";
 import Settings from "../../icons/Settings";
-import { useState } from "react";
-import ChevronDoubleLeft from "../../icons/ChevronDoubleLeft";
-import ChevronDoubleRight from "../../icons/ChevronDoubleRight";
+import Code from "../../icons/Code";
 
 
 const Dashboard: React.FC = () => {
 
     const logout = useLogout();
     const navigate = useNavigate();
-
-    const [open, setOpen] = useState<boolean>(true);
 
     const handleLogout = async () => {
         await logout();
@@ -59,6 +55,12 @@ const Dashboard: React.FC = () => {
             icon: <Settings style="w-6 h-6" />,
             roles: [Role.Admin, Role.Editor]
         },
+        {
+            name: "beta",
+            path: "/dashboard/beta",
+            icon: <Code style="w-6 h-6" />,
+            roles: [Role.Admin, Role.Editor]
+        }
     ];
 
     const NavigationTab: React.FC<Navigation> = ({ name, path, icon, roles }) => {
@@ -76,15 +78,10 @@ const Dashboard: React.FC = () => {
                             ? " hidden"
                             : ""
                     ) +
-                    (
-                        open
-                            ? " md:space-x-2 md:px-6 px-2"
-                            : " justify-center"
-                    ) +
-                    " flex justify-center md:justify-start items-center py-1 md:py-2 rounded-md transition duration-150 ease-in-out hover:bg-emerald-200"}
+                    " md:space-x-2 md:px-6 px-2 flex justify-center md:justify-start items-center py-1 md:py-2 rounded-md transition duration-150 ease-in-out hover:bg-emerald-200"}
                 >
                     { icon }
-                    <p className={(open ? "" : "hidden") + " capitalize hidden md:block"}>
+                    <p className={"capitalize hidden md:block"}>
                         { name }
                     </p>
                 </NavLink>
@@ -95,25 +92,14 @@ const Dashboard: React.FC = () => {
     return (
         <div className="bg-slate-100 font-sans overflow-x-hidden text-gray-900 relative">
             <div className="flex relative">
-                <div className={(open ? "w-60 px-2" : "w-24 px-2") + " hidden md:block md:fixed h-screen rounded-r-lg shadow-md bg-white"}>
-
-                    <button 
-                        onClick={() => setOpen(!open)}
-                        className="absolute top-0 right-0 w-8 h-8 rounded-l-full bg-slate-100 border border-slate-300 shadow-sm flex justify-center items-center transition duration-150 ease-in-out hover:bg-emerald-500 hover:border-emerald-500 hover:text-white"
-                    >
-                        {
-                            open
-                                ? <ChevronDoubleLeft style="w-4 h-4" />
-                                : <ChevronDoubleRight style="w-4 h-4" />
-                        }
-                    </button>
+                <div className={"w-60 px-2 hidden md:block md:fixed h-screen rounded-r-lg shadow-md bg-white"}>
 
                     <div className="w-full flex justify-center mt-8">
                         <NavLink 
                             to={"/"}
                             className="text-emerald-500 font-bold text-3xl"
                         >
-                            { open ? "HypeStock" : "H"}
+                            HypeStock
                         </NavLink>
                     </div>
 
@@ -134,10 +120,10 @@ const Dashboard: React.FC = () => {
                     <div className="w-full">
                         <button
                             onClick={handleLogout}
-                            className={(open ? "space-x-2 px-6" : "justify-center") + " w-full flex items-center py-2 rounded-md bg-black text-white duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"}
+                            className={"space-x-2 px-6 w-full flex items-center py-2 rounded-md bg-black text-white duration-150 ease-in-out transition hover:bg-slate-300 hover:text-slate-900"}
                         >
                             <Logout style="w-6 h-6" />
-                            <p className={(open ? "" : "hidden") + " font-semibold"}>
+                            <p className={"font-semibold"}>
                                 Logout
                             </p>
                         </button>
@@ -178,7 +164,7 @@ const Dashboard: React.FC = () => {
                 </div>
             </div>
             
-            <div className={(open ? "md:ml-60" : "md:ml-24") +  " min-h-screen"}>
+            <div className={"md:ml-60 min-h-screen"}>
                 <div className="w-full relative">
                     <Outlet />
                 </div>
