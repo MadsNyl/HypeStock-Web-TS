@@ -22,6 +22,7 @@ import ArticleConfigPage from "./pages/dashboard/config/Article";
 import BetaPage from "./pages/dashboard/Beta";
 import FilingPage from "./pages/dashboard/Filing";
 import StatementPage from "./pages/dashboard/Statement";
+import { RedditPage } from "./pages/dashboard/Reddit";
 
 function App() {
 
@@ -30,9 +31,10 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            <Route path="/login" element={<Login />} />
+            
             <Route element={<Nav />}>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
             </Route>
               <Route element={<Dashboard />}>
                 <Route element={<PersistLogin />}>
@@ -53,6 +55,7 @@ function App() {
                     <Route path="/dashboard/beta" element={<BetaPage />} />
                     <Route path="/dashboard/filings/:id" element={<FilingPage />} />
                     <Route path="/dashboard/statements/:id" element={<StatementPage />} />
+                    <Route path="/dashboard/reddit" element={<RedditPage />} />
                   </Route>
                   <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
                     <Route path="/dashboard/users" element={<UsersPage />} />

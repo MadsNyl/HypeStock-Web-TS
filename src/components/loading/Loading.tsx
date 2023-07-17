@@ -3,7 +3,7 @@ import Spinner from "./Spinner";
 
 const LoadingScreen: React.FC = () => {
     return (
-        <div className="w-full h-screen bg-slate-700 flex justify-center items-center">
+        <div className="w-full h-screen bg-gray-100 flex justify-center items-center">
             <div>
                 <div className="pb-16">
                     <h1 className="text-center text-emerald-500 text-7xl font-bold">
@@ -17,7 +17,7 @@ const LoadingScreen: React.FC = () => {
                                 <Spinner />
                             </div>
                         </div>
-                        <h1 className="text-4xl font-bold text-white text-center">
+                        <h1 className="text-4xl font-bold text-center">
                             Loading...
                         </h1>
                     </div>

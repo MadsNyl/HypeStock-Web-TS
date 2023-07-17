@@ -12,6 +12,7 @@ import Role from "../../enums/Role";
 import isRoleLocked from "../../utils/isRoleLocked";
 import Settings from "../../icons/Settings";
 import Code from "../../icons/Code";
+import Chat from "../../icons/Chat";
 
 
 const Dashboard: React.FC = () => {
@@ -26,7 +27,7 @@ const Dashboard: React.FC = () => {
 
     const navigations = [
         {
-            name: "my profile",
+            name: "account",
             path: "/dashboard/profile",
             icon: <User style="w-6 h-6" />,
             roles: [Role.Admin, Role.Editor, Role.User]
@@ -41,6 +42,12 @@ const Dashboard: React.FC = () => {
             name: "articles",
             path: "/dashboard/articles",
             icon: <ArchiveBox style="w-6 h-6" />,
+            roles: [Role.Admin, Role.Editor]
+        },
+        {
+            name: "reddit",
+            path: "/dashboard/reddit",
+            icon: <Chat style="w-6 h-6" />,
             roles: [Role.Admin, Role.Editor]
         },
         {
@@ -90,9 +97,9 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="bg-slate-100 font-sans overflow-x-hidden text-gray-900 relative">
+        <div className="bg-gray-100 font-sans overflow-x-hidden text-gray-900 relative">
             <div className="flex relative">
-                <div className={"w-60 px-2 hidden md:block md:fixed h-screen rounded-r-lg shadow-md bg-white"}>
+                <div className={"w-60 px-2 hidden md:block md:fixed h-screen shadow-md bg-white"}>
 
                     <div className="w-full flex justify-center mt-8">
                         <NavLink 

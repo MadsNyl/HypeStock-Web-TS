@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
 import { AxiosError } from "axios";
+import { NavLink } from "react-router-dom";
+import TextInput from "../components/form/TextInput";
+import CheckBox from "../components/form/CheckBox";
+import Button from "../components/form/Button";
 
 
 const Login: React.FC = () => {
@@ -73,8 +77,108 @@ const Login: React.FC = () => {
     }
 
     return (
-        <div className="flex justify-center mt-24">
-            <div className="md:max-w-2xl w-full mx-6 md:mx-0 bg-white border border-gray-200 rounded-md shadow-sm px-12 py-6">
+        <div className="p-4 flex min-h-screen h-full">
+
+            <div className="flex w-full space-x-12">
+                <div className="max-w-md w-full rounded-lg h-full bg-emerald-400 shadow-sm px-12 py-6">
+                    <div className="pb-32">
+                        <NavLink
+                            className="text-white text-xl font-bold"
+                            to={"/"}
+                        >
+                            HypeStock
+                        </NavLink>
+                    </div>
+
+                    <div className="flex justify-center text-white">
+                        <div className="space-y-6">
+                            <h1 className="font-bold text-6xl">
+                                Welcome back!
+                            </h1>
+                            <p>
+                                Sign in and continue your work with analytics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="max-w-xl w-full px-12 py-20">
+                    <div>
+                        <div className="space-y-4 pb-20">
+                            <h1 className="font-bold text-3xl">
+                                Login
+                            </h1>
+                            <p className="">
+                                Don't have an account? <NavLink to={"/"} className="text-emerald-500 font-semibold" >Register</NavLink>
+                            </p>
+                        </div>
+
+                        <form
+                            className="w-full pb-8 font-semibold"
+                            onSubmit={handleLogin}
+                        >
+                            <div className="pb-8">
+                                <div>
+                                    <h1 className="text-xl font-semibold pb-4">
+                                        Username
+                                    </h1>
+                                </div>
+                                <TextInput 
+                                    type="email"
+                                    value={username}
+                                    onChange={e => setUsername(e.target.value)}
+                                    required={true}
+                                />
+                            </div>
+
+                            <div className="pb-4">
+                                <div>
+                                    <h1 className="text-xl font-semibold pb-4">
+                                        Password
+                                    </h1>
+                                </div>
+                                <TextInput 
+                                    type="password"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    required={true}
+                                />
+                            </div>
+
+                            <div className="flex items-center space-x-2 pb-12">
+                                <CheckBox 
+                                    onChange={togglePersist}
+                                    checked={persist}
+                                />
+                                <p>
+                                    Remember me?
+                                </p>
+                            </div>
+
+                            <div className="w-64">
+                                <Button
+                                    title="Login"
+                                    type="basic"
+                                    disabled={isLoading}
+                                />
+                            </div>
+                        </form>
+
+                        <div>
+                            <h1 className="text-red-800">
+                                {
+                                    errMsg.length
+                                        ? errMsg
+                                        : ""
+                                }
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {/* <div className="md:max-w-2xl w-full mx-6 md:mx-0 bg-white border border-gray-200 rounded-md shadow-sm px-12 py-6">
                 <form
                     className=""
                     onSubmit={handleLogin}
@@ -141,7 +245,7 @@ const Login: React.FC = () => {
                         </button>
                     </div>
                 </form>
-            </div>
+            </div> */}
         </div>
     );
 }

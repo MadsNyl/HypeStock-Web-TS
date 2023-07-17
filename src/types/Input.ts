@@ -1,9 +1,12 @@
 
 
 type Input = {
-    value: any;
-    disabled: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    value?: any;
+    disabled?: boolean;
+    type?: string;
+    required?: boolean;
+    checked?: boolean;
 }
 
 

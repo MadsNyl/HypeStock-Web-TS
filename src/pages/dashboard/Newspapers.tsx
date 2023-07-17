@@ -10,6 +10,7 @@ import GetArticleStatus from "../../components/GetArticleStatus";
 import Button from "../../components/form/Button";
 import DashboardPage from "../../components/wrapper/DashboardPage";
 import LoadingScreen from "../../components/loading/Loading";
+import Background from "../../components/wrapper/Background";
 
 
 const NewspapersPage: React.FC = () => {
@@ -195,6 +196,9 @@ const GuideInfo: React.FC<NewspaperGuideInfo> = ({ name, description }) => {
 }
 
 const NewspaperRow: React.FC<Newspaper> = ({ provider, base_url, start_url, full_name, article_count, logo }) => {
+
+    const [show, setShow] = useState<boolean>(false);
+
     return (
         <>
             <tr className="bg-white border-b">
@@ -214,11 +218,22 @@ const NewspaperRow: React.FC<Newspaper> = ({ provider, base_url, start_url, full
                     { start_url }
                 </td>
                 <td className="px-6 py-4">
-                    <div className="flex h-full justify-center items-center">
-                        <GetArticleStatus 
-                            article_count={Number(article_count)}
-                            size="sm"
-                        />
+                    <div 
+                        onClick={() => setShow(!show)}
+                        className="flex h-full justify-center items-center cursor-pointer"
+                    >
+                        {
+                            show
+                                ?
+                                <p className="font-medium">
+                                    { article_count }
+                                </p>
+                                :
+                                <GetArticleStatus 
+                                    article_count={Number(article_count)}
+                                    size="sm"
+                                />
+                        }
                     </div>
                 </td>
                 <td className="px-6 py-4 text-right">

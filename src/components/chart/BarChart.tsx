@@ -1,10 +1,10 @@
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
@@ -13,13 +13,13 @@ import {
 import ComponentLineChart from "../../types/ComponentLineChart";
 
 
-const LineChart: React.FC<ComponentLineChart> = ({ labels, data, dataLabel, text }) => {
+const BarChart: React.FC<ComponentLineChart> = ({ labels, data, dataLabel, text }) => {
 
     ChartJS.register(
         CategoryScale,
         LinearScale,
         PointElement,
-        LineElement,
+        BarElement,
         Title,
         Tooltip,
         Legend,
@@ -62,9 +62,9 @@ const LineChart: React.FC<ComponentLineChart> = ({ labels, data, dataLabel, text
 
     return (
         <div className="w-full">
-            <Line options={options} data={renderData} />
+            <Bar options={options} data={renderData} />
         </div>
     );
 }
 
-export default LineChart;
+export default BarChart;

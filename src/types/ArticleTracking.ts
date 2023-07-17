@@ -2,7 +2,7 @@
 
 type ArticleTrackingType = {
     title: string;
-    count: number;
+    count: string;
 }
 
 export default  ArticleTrackingType;

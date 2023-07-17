@@ -1,22 +1,21 @@
-import ChartBar from "../../icons/ChartBar";
-import Settings from "../../icons/Settings";
-import ArticleTrackingType from "../../types/ArticleTracking";
-import RightArrow from "../../icons/RightArrow";
-import { useEffect, useState } from "react";
-import ArticleBaseData, { defaultArticleBaseData } from "../../types/ArticleBaseData";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import LineChart from "../../components/chart/LineChart";
-import NavButton from "../../components/form/NavButton";
-import DashboardPage from "../../components/wrapper/DashboardPage";
 import LoadingScreen from "../../components/loading/Loading";
 import Background from "../../components/wrapper/Background";
+import DashboardPage from "../../components/wrapper/DashboardPage";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import ChartBar from "../../icons/ChartBar";
+import { useState, useEffect } from "react";
+import RedditBaseData, { defaultRedditBaseData } from "../../types/RedditBaseData";
+import BarChart from "../../components/chart/BarChart";
+import NavButton from "../../components/form/NavButton";
+import RightArrow from "../../icons/RightArrow";
+import Settings from "../../icons/Settings";
 
 
-const ArticlesPage: React.FC = () => {
+export const RedditPage: React.FC = () => {
 
     const axios = useAxiosPrivate();
 
-    const [baseData, setBaseData] = useState<ArticleBaseData>(defaultArticleBaseData);
+    const [baseData, setBaseData] = useState<RedditBaseData>(defaultRedditBaseData);
     const [isLoading, setLoading] = useState<boolean>(false);
     const [days, _setDays] = useState<number>(7);
 
@@ -24,7 +23,7 @@ const ArticlesPage: React.FC = () => {
         setLoading(true);
 
         try {
-            const response = await axios.get(`/article/base?days=${days}`);
+            const response = await axios.get(`/reddit/days=${days}`);
             setBaseData(response?.data);
         } catch (e) {
 
@@ -35,29 +34,9 @@ const ArticlesPage: React.FC = () => {
 
     useEffect(() => {
         getBaseData();
-    }, []);
+    }, [])
 
-    const articlesTracking = [
-        {
-            title: "Total number of articles",
-            count: baseData.total_article_count.length
-                    ? baseData.total_article_count[0].count.toLocaleString()
-                    : "0"
-        },
-        {
-            title: "Articles collected last 24 h",
-            count: baseData.article_count_last_day.length
-                    ? baseData.article_count_last_day[0].count.toLocaleString()
-                    : "0"
-        },
-        {
-            title: "Articles collected last week",
-            count: baseData.article_count_by_days.length
-                    ? baseData.article_count_by_days[0].count.toLocaleString()
-                    : "0"
-        },
-    ];
-
+    
     if (isLoading) {
         return <LoadingScreen />
     }
@@ -65,10 +44,9 @@ const ArticlesPage: React.FC = () => {
     return (
         <>
             <DashboardPage>
-
                 <div className="pt-20 md:pt-8 pb-16 md:pb-24 flex items-center justify-between mx-auto w-full">
                     <h1 className="text-3xl md:text-4xl font-bold">
-                        Articles
+                        Reddit
                     </h1>
 
                     <div>
@@ -87,25 +65,17 @@ const ArticlesPage: React.FC = () => {
                     <div className="w-full flex space-x-6">
                         <div className="max-w-3xl w-full space-y-4">
                             <Background>
-                                <LineChart 
-                                    text="Number of articles collected for each hour the last 24 hours"
-                                    dataLabel="Number of articles"
-                                    labels={baseData?.article_count_each_hour.map(item => item.date.toString())}
-                                    data={baseData?.article_count_each_hour.map(item => item.count)}
-                                />
-                            </Background>
-                            <Background>
-                                <LineChart 
-                                    text={`Number of articles collected for each day the last ${days} days`}
-                                    dataLabel="Number of articles"
-                                    labels={baseData?.article_count_each_day.map(item => item.date.toString())}
-                                    data={baseData?.article_count_each_day.map(item => item.count)}
+                                <BarChart 
+                                    text="Number of comments collected for each subreddit"
+                                    dataLabel="Number of comments"
+                                    labels={baseData?.commentCountPerSubreddit.map(item => item.name)}
+                                    data={baseData?.commentCountPerSubreddit.map(item => item.count)}
                                 />
                             </Background>
                         </div>
 
                         <div className="space-y-4 max-w-xs w-full">
-                            {
+                            {/* {
                                 articlesTracking.map((item, index) => {
                                     return <ArticleTracking 
                                                 key={index}
@@ -113,12 +83,11 @@ const ArticlesPage: React.FC = () => {
                                                 count={item.count}
                                             />
                                 })
-                            }
+                            } */}
                         </div>
                     </div>
-
                 </div>
-
+                
                 <div className="pb-24">
                     <div className="flex items-center space-x-2 pb-8 md:px-6">
                         <h1 className="text-2xl font-semibold">
@@ -131,13 +100,13 @@ const ArticlesPage: React.FC = () => {
                         <Background>
                             <div className="pb-6">
                                 <h1 className="text-xl font-semibold">
-                                    Homographs with Tickers
+                                    Subreddits
                                 </h1>
                             </div>
 
                             <div className="pb-12">
                                 <p>
-                                    These linguistic homographs demonstrate a unique duality, functioning both as everyday language and as symbols representing specific companies in the financial world.
+                                    Overview of the subreddits of Reddit which data is collected from.
                                 </p>
                             </div>
 
@@ -145,16 +114,14 @@ const ArticlesPage: React.FC = () => {
                                 <div>
                                     <h1 className="font-medium text-lg">
                                         Current count: <span className="text-emerald-500">{
-                                            baseData.total_article_words_count.length
-                                                ? baseData.total_article_words_count[0].count
-                                                : 0
+                                            baseData.commentCountPerSubreddit.length
                                         }</span>
                                     </h1>
                                 </div>
                                 <div>
                                     <NavButton 
                                         type="basic"
-                                        path="/dashboard/articles/homographs"
+                                        path="/reddit/subreddits"
                                         icon={<RightArrow style="w-4 h-4 ml-1" />}
                                         title="See more"
                                     />
@@ -165,13 +132,13 @@ const ArticlesPage: React.FC = () => {
                         <Background>
                             <div className="pb-6">
                                 <h1 className="text-xl font-semibold">
-                                    Article Crawler
+                                    Reddit Scraper
                                 </h1>
                             </div>
 
                             <div className="pb-12">
                                 <p>
-                                    The article crawler is a script which crawl the webpages of the newspapers for articles. The config contains a set of options for how the crawler should operate.
+                                    The reddit scraper is a script which calls the api for reddit and collects data about subreddits, submissions and comments. The config contains a set of options for how the scraper should operate.
                                 </p>
                             </div>
 
@@ -179,7 +146,7 @@ const ArticlesPage: React.FC = () => {
                                 <div>
                                     <NavButton 
                                         type="basic"
-                                        path="/dashboard/config/article"
+                                        path="/dashboard/config/reddit"
                                         icon={<RightArrow style="w-4 h-4 ml-1" />}
                                         title="See more"
                                     />
@@ -188,28 +155,7 @@ const ArticlesPage: React.FC = () => {
                         </Background>
                     </div>
                 </div>
-
             </DashboardPage>
         </>
     );
-}
-
-const ArticleTracking: React.FC<ArticleTrackingType> = ({ title, count }) =>{
-    return (
-        <Background
-            padding="px-8 py-6"
-        >
-            <div className="flex justify-center pb-4">
-                <h1 className="font-bold text-2xl text-emerald-500">
-                    { count }
-                </h1>
-            </div>
-            <h1 className="font-semibold text-gray-400 text-center">
-                { title }
-            </h1>
-        </Background>
-    );
-}
-
-
-export default ArticlesPage;
+} 
