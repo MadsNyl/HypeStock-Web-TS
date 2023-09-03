@@ -1,11 +1,12 @@
 
 
 type Ticker = {
-    created_date: Date,
-    exchange: string,
-    legacy: boolean,
-    name: string,
-    symbol: string
+    name: string;
+    symbol: string;
+    created_date?: Date;
+    exchange?: string;
+    cik?: number;
+    legacy?: boolean;
 }
 
 export const defaultTicker = {
@@ -13,7 +14,8 @@ export const defaultTicker = {
     exchange: "",
     legacy: false,
     name: "",
-    symbol: ""
+    symbol: "",
+    cik: 0
 }
 
 export default Ticker;

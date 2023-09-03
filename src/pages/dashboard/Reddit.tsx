@@ -23,7 +23,7 @@ export const RedditPage: React.FC = () => {
         setLoading(true);
 
         try {
-            const response = await axios.get(`/reddit/days=${days}`);
+            const response = await axios.get(`/reddit?days=${days}`);
             setBaseData(response?.data);
         } catch (e) {
 
@@ -121,7 +121,7 @@ export const RedditPage: React.FC = () => {
                                 <div>
                                     <NavButton 
                                         type="basic"
-                                        path="/reddit/subreddits"
+                                        path="/dashboard/reddit/subreddits"
                                         icon={<RightArrow style="w-4 h-4 ml-1" />}
                                         title="See more"
                                     />

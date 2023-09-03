@@ -10,7 +10,6 @@ import GetArticleStatus from "../../components/GetArticleStatus";
 import Button from "../../components/form/Button";
 import DashboardPage from "../../components/wrapper/DashboardPage";
 import LoadingScreen from "../../components/loading/Loading";
-import Background from "../../components/wrapper/Background";
 
 
 const NewspapersPage: React.FC = () => {
@@ -202,12 +201,12 @@ const NewspaperRow: React.FC<Newspaper> = ({ provider, base_url, start_url, full
     return (
         <>
             <tr className="bg-white border-b">
-                <th scope="row" className="hidden md:table-cell px-6 py-4">
+                <td scope="row" className="hidden md:table-cell px-6 py-4">
                     <img 
                         className="w-20"
                         src={logo}
                     />
-                </th>
+                </td>
                 <td className="px-6 py-4">
                     { full_name }
                 </td>

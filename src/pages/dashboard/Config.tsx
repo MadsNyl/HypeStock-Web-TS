@@ -20,6 +20,11 @@ const ConfigPage: React.FC = () => {
             title: "articles",
             description: "Configurations for articles. These configs will decide how the article crawler will operate.",
             path: "/dashboard/config/article"
+        },
+        {
+            title: "reddit",
+            description: "Configurations for Reddit. These configs will decide how the Reddit crawler will operate.",
+            path: "/dashboard/config/reddit"
         }
     ];
 

@@ -9,7 +9,7 @@ import CheckBox from "../components/form/CheckBox";
 import Button from "../components/form/Button";
 
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
     const { auth, setAuth, persist, setPersist } = useAuth();
 
     const navigate = useNavigate();
@@ -99,10 +99,10 @@ const Login: React.FC = () => {
                     <div className="flex justify-center text-white">
                         <div className="space-y-6">
                             <h1 className="font-bold text-6xl">
-                                Welcome back!
+                                Welcome!
                             </h1>
                             <p>
-                                Sign in and continue your work with analytics.
+                                Sign up and explore all the features HypeStock has to offer.
                             </p>
                         </div>
                     </div>
@@ -112,63 +112,22 @@ const Login: React.FC = () => {
                     <div>
                         <div className="space-y-4 pb-20">
                             <h1 className="font-bold text-3xl">
-                                Login
+                                Register
                             </h1>
                             <p className="">
-                                Don't have an account? <NavLink to={"/register"} className="text-emerald-500 font-semibold" >Register</NavLink>
+                                Already have an account? <NavLink to={"/login"} className="text-emerald-500 font-semibold">Login</NavLink>
                             </p>
                         </div>
 
-                        <form
-                            className="w-full pb-8 font-semibold"
-                            onSubmit={handleLogin}
-                        >
-                            <div className="pb-8">
-                                <div>
-                                    <h1 className="text-xl font-semibold pb-4">
-                                        Username
-                                    </h1>
-                                </div>
-                                <TextInput 
-                                    type="email"
-                                    value={username}
-                                    onChange={e => setUsername(e.target.value)}
-                                    required={true}
-                                />
-                            </div>
+                        <div className="space-y-12">
+                            <h1 className="text-3xl font-bold">
+                                It is not possible to create an account yet, unfortunately.
+                            </h1>
 
-                            <div className="pb-4">
-                                <div>
-                                    <h1 className="text-xl font-semibold pb-4">
-                                        Password
-                                    </h1>
-                                </div>
-                                <TextInput 
-                                    type="password"
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
-                                    required={true}
-                                />
-                            </div>
-
-                            <div className="flex items-center space-x-2 pb-12">
-                                <CheckBox 
-                                    onChange={togglePersist}
-                                    checked={persist}
-                                />
-                                <p>
-                                    Remember me?
-                                </p>
-                            </div>
-
-                            <div className="w-64">
-                                <Button
-                                    title="Login"
-                                    type="basic"
-                                    disabled={isLoading}
-                                />
-                            </div>
-                        </form>
+                            <h1 className="font-semibold text-xl">
+                                Please check in later for updates.
+                            </h1>
+                        </div>
 
                         <div>
                             <h1 className="text-red-800">
@@ -187,4 +146,4 @@ const Login: React.FC = () => {
     );
 }
 
-export default Login;
+export default Register;

@@ -23,6 +23,11 @@ import BetaPage from "./pages/dashboard/Beta";
 import FilingPage from "./pages/dashboard/Filing";
 import StatementPage from "./pages/dashboard/Statement";
 import { RedditPage } from "./pages/dashboard/Reddit";
+import SubredditsPage from "./pages/dashboard/Subreddits";
+import RedditConfigPage from "./pages/dashboard/config/Reddit";
+import TickersPage from "./pages/public/Tickers";
+import TickerPage from "./pages/public/Ticker";
+import Register from "./pages/Register";
 
 function App() {
 
@@ -32,36 +37,42 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home />} />
             
             <Route element={<Nav />}>
-              <Route path="/" element={<Home />} />
+              <Route path="/tickers" element={<TickersPage />} />
+              <Route path="/tickers/:symbol" element={<TickerPage />} />
             </Route>
-              <Route element={<Dashboard />}>
-                <Route element={<PersistLogin />}>
-                  <Route element={<RequireAuth allowedRoles={[Role.Admin, Role.Editor, Role.User]} />}>
-                    <Route path="/dashboard/profile" element={<ProfilePage />} />
-                  </Route>
-                  <Route element={<RequireAuth allowedRoles={[Role.Admin, Role.Editor]} />}>
-                    <Route path="/dashboard/newspapers" element={<NewspapersPage />} />
-                    <Route path="/dashboard/newspapers/:provider" element={<NewspaperPage />} />
-                    <Route path="/dashboard/articles" element={<ArticlesPage />} />
-                    <Route path="/dashboard/articles/config" element={<ArticleCrawlerConfigPage />} />
-                    <Route path="/dashboard/articles/homographs" element={<HomographsPage />} />
-                    <Route path="/dashboard/articles/homographs/:id" element={<HomographDetails />} />
-                    <Route path="/dashboard/articles/homographs/add" element={<AddHomographPage />} />
-                    <Route path="/dashboard/config" element={<ConfigPage />} />
-                    <Route path="/dashboard/config/file" element={<ConfigFilePage />} />
-                    <Route path="/dashboard/config/article" element={<ArticleConfigPage />} />
-                    <Route path="/dashboard/beta" element={<BetaPage />} />
-                    <Route path="/dashboard/filings/:id" element={<FilingPage />} />
-                    <Route path="/dashboard/statements/:id" element={<StatementPage />} />
-                    <Route path="/dashboard/reddit" element={<RedditPage />} />
-                  </Route>
-                  <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
-                    <Route path="/dashboard/users" element={<UsersPage />} />
-                  </Route>
+
+            <Route element={<Dashboard />}>
+              <Route element={<PersistLogin />}>
+                <Route element={<RequireAuth allowedRoles={[Role.Admin, Role.Editor, Role.User]} />}>
+                  <Route path="/dashboard/profile" element={<ProfilePage />} />
+                </Route>
+                <Route element={<RequireAuth allowedRoles={[Role.Admin, Role.Editor]} />}>
+                  <Route path="/dashboard/newspapers" element={<NewspapersPage />} />
+                  <Route path="/dashboard/newspapers/:provider" element={<NewspaperPage />} />
+                  <Route path="/dashboard/articles" element={<ArticlesPage />} />
+                  <Route path="/dashboard/articles/config" element={<ArticleCrawlerConfigPage />} />
+                  <Route path="/dashboard/articles/homographs" element={<HomographsPage />} />
+                  <Route path="/dashboard/articles/homographs/:id" element={<HomographDetails />} />
+                  <Route path="/dashboard/articles/homographs/add" element={<AddHomographPage />} />
+                  <Route path="/dashboard/config" element={<ConfigPage />} />
+                  <Route path="/dashboard/config/file" element={<ConfigFilePage />} />
+                  <Route path="/dashboard/config/article" element={<ArticleConfigPage />} />
+                  <Route path="/dashboard/config/reddit" element={<RedditConfigPage />} />
+                  <Route path="/dashboard/beta" element={<BetaPage />} />
+                  <Route path="/dashboard/filings/:id" element={<FilingPage />} />
+                  <Route path="/dashboard/statements/:id" element={<StatementPage />} />
+                  <Route path="/dashboard/reddit" element={<RedditPage />} />
+                  <Route path="/dashboard/reddit/subreddits" element={<SubredditsPage />} />
+                </Route>
+                <Route element={<RequireAuth allowedRoles={[Role.Admin]} />}>
+                  <Route path="/dashboard/users" element={<UsersPage />} />
                 </Route>
               </Route>
+            </Route>
           </Routes> 
         </AuthProvider>
       </BrowserRouter>
