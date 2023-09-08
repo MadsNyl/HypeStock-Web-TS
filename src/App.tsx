@@ -38,9 +38,9 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/" element={<Home />} />
             
             <Route element={<Nav />}>
+              <Route path="/" element={<Home />} />
               <Route path="/tickers" element={<TickersPage />} />
               <Route path="/tickers/:symbol" element={<TickerPage />} />
             </Route>

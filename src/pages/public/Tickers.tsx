@@ -4,6 +4,7 @@ import Search from "../../icons/Search";
 import Ticker from "../../types/Ticker";
 import axios from "../../api/axios";
 import { NavLink } from "react-router-dom";
+import SearchBar from "../../components/input/SearchBar";
 
 
 const TickersPage: React.FC = () => {
@@ -31,32 +32,49 @@ const TickersPage: React.FC = () => {
     }, [searchWord]);
 
     return (
-        <>
-            <PublicPage>
-                <div className="max-w-xl w-full mx-auto mt-12 pb-20">
-                    <div className="flex items-center space-x-4 bg-white rounded-md border border-gray-200 px-4 shadow-sm">
-                        <input
-                            onChange={e => setSearchWord(e.target.value)}
-                            className="focus:outline-none py-3 w-full" 
-                            type="text" 
-                            placeholder="Search for a ticker or company name..."
-                        />
-                        <Search style="w-6 h-6" />
+        <div className="min-h-screen bg-slate-950 px-12">
+            <div className="pt-48 space-y-6">
+                <div className="max-w-4xl w-full mx-auto flex items-center justify-between border-b border-b-gray-800 pb-12">
+                    <div className="max-w-sm w-full">
+                        <SearchBar />
+                    </div>
+
+                    <div className="text-white">
+                        tet
                     </div>
                 </div>
 
-                <div className="grid grid-cols-4 gap-6">
-                    {
-                        isLoading
-                            ? <></>
-                            : 
-                            tickers.map((item, index) => {
-                                return <TickerView key={index} name={item.name} symbol={item.symbol} />
-                            })
-                    }
+                <div className="grid grid-cols-3 gap-12">
+
                 </div>
-            </PublicPage>
-        </>
+            </div>
+        </div>
+        // <>
+        //     <PublicPage> 
+        //         <div className="max-w-xl w-full mx-auto mt-12 pb-20">
+        //             <div className="flex items-center space-x-4 bg-white rounded-md border border-gray-200 px-4 shadow-sm">
+        //                 <input
+        //                     onChange={e => setSearchWord(e.target.value)}
+        //                     className="focus:outline-none py-3 w-full" 
+        //                     type="text" 
+        //                     placeholder="Search for a ticker or company name..."
+        //                 />
+        //                 <Search style="w-6 h-6" />
+        //             </div>
+        //         </div>
+
+        //         <div className="grid grid-cols-4 gap-6">
+        //             {
+        //                 isLoading
+        //                     ? <></>
+        //                     : 
+        //                     tickers.map((item, index) => {
+        //                         return <TickerView key={index} name={item.name} symbol={item.symbol} />
+        //                     })
+        //             }
+        //         </div>
+        //     </PublicPage>
+        // </>
     );
 }
 
