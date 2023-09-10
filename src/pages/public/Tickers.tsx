@@ -5,6 +5,7 @@ import Ticker from "../../types/Ticker";
 import axios from "../../api/axios";
 import { NavLink } from "react-router-dom";
 import SearchBar from "../../components/input/SearchBar";
+import useTickers from "../../hooks/api/useTickers";
 
 
 const TickersPage: React.FC = () => {
@@ -13,23 +14,25 @@ const TickersPage: React.FC = () => {
     const [tickers, setTickers] = useState<Ticker[]>([]);
     const [searchWord, setSearchWord] = useState<string>("");
 
-    const search = async () => {
-        setLoading(true);
+    const { data, error } = useTickers(10);
 
-        try {
-            const response = await axios.get(`/ticker/search?search=${searchWord}&limit=20`);
+    // const search = async () => {
+    //     setLoading(true);
 
-            response?.data?.tickers && setTickers(response?.data?.tickers)
-        } catch (error) {
+    //     try {
+    //         const response = await axios.get(`/ticker/search?search=${searchWord}&limit=20`);
 
-        } finally {
-            setLoading(false);
-        }
-    }
+    //         response?.data?.tickers && setTickers(response?.data?.tickers)
+    //     } catch (error) {
 
-    useEffect(() => {
-        searchWord.length >= 2 && search();
-    }, [searchWord]);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     searchWord.length >= 2 && search();
+    // }, [searchWord]);
 
     return (
         <div className="min-h-screen bg-slate-950 px-12">

@@ -3,7 +3,7 @@ import NavButton from "../navigation/NavButton";
 
 const Nav = () => {
     return (
-        <>
+        <div className="relative max-w-7xl w-full mx-auto">
             <div className="absolute w-full">
                 <header className="flex items-center justify-between px-28 pt-6">
                     <div>
@@ -33,10 +33,10 @@ const Nav = () => {
                 </header>
             </div>
 
-            <div className="max-w-8xl mx-auto min-h-screen">
+            <div className="min-h-screen">
                 <Outlet />
             </div>
-        </>
+        </div>
     );
 }
 
